@@ -1,0 +1,16 @@
+# Visual Studio cache files
+.vs/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# MSTest test Results
+[TestRr]esult*/
+[Bb]uild[Ll]og.*
