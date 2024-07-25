@@ -43,53 +43,47 @@ namespace ExpenseTraciking.Presentation.Controllers
             return Ok(expense);
         }
 
-        //    // GET: api/expenses/5
-        //    [HttpGet("{id}")]
-        //    public async Task<ActionResult<Expense>> GetExpense(int id)
-        //    {
-        //        var expense = await _expenseRepository.GetExpenseByIdAsync(id);
-        //        if (expense == null)
-        //        {
-        //            return NotFound();
-        //        }
+        [HttpPost]
+        public IActionResult AddExpense([FromBody] Expense expense)
+        {
+            if (expense == null)
+            {
+                return BadRequest();
+            }
 
-        //        return Ok(expense);
-        //    }
+            _expenseRepository.AddExpense(expense);
+            return CreatedAtAction(nameof(GetExpenseById), new { expenseId = expense.Id }, expense);
+        }
+        [HttpPut("{id}")]
+        public IActionResult UpdateExpense(int id, [FromBody] Expense expense)
+        {
+            if (expense == null || expense.Id != id)
+            {
+                return BadRequest();
+            }
 
-        //    // POST: api/expenses
-        //    [HttpPost]
-        //    public async Task<ActionResult<Expense>> PostExpense(Expense expense)
-        //    {
-        //        await _expenseRepository.AddExpenseAsync(expense);
-        //        return CreatedAtAction(nameof(GetExpense), new { id = expense.Id }, expense);
-        //    }
+            var existingExpense = _expenseRepository.GetExpenseById(id);
+            if (existingExpense == null)
+            {
+                return NotFound();
+            }
 
-        //    // PUT: api/expenses/5
-        //    [HttpPut("{id}")]
-        //    public async Task<IActionResult> PutExpense(int id, Expense expense)
-        //    {
-        //        if (id != expense.Id)
-        //        {
-        //            return BadRequest();
-        //        }
+            _expenseRepository.UpdateExpense(expense);
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteExpense(int id)
+        {
+            var expense = _expenseRepository.GetExpenseById(id);
+            if (expense == null)
+            {
+                return NotFound();
+            }
 
-        //        await _expenseRepository.UpdateExpenseAsync(expense);
-        //        return NoContent();
-        //    }
+            _expenseRepository.DeleteExpense(id);
+            return NoContent();
+        }
 
-        //    // DELETE: api/expenses/5
-        //    [HttpDelete("{id}")]
-        //    public async Task<IActionResult> DeleteExpense(int id)
-        //    {
-        //        var expense = await _expenseRepository.GetExpenseByIdAsync(id);
-        //        if (expense == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        await _expenseRepository.DeleteExpenseAsync(id);
-        //        return NoContent();
-        //    }
     }
 }
 

@@ -33,17 +33,33 @@ namespace ExpenseTracking.Infrastructure.Repositories
 
         public void UpdateExpense(Expense expense)
         {
-            _context.Expenses.Update(expense);
-            _context.SaveChangesAsync();
+            var existingExpense = _context.Expenses.Find(expense.Id);
+            if (existingExpense != null)
+            {
+                _context.Entry(existingExpense).CurrentValues.SetValues(expense);
+                _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException("Expense not found.");
+            }
         }
+
 
         public void DeleteExpense(int id)
         {
             var expense = _context.Expenses.Find(id);
-            _context.Expenses.Remove(expense!);
-            _context.SaveChangesAsync();
+            if (expense != null)
+            {
+                _context.Expenses.Remove(expense);
+                _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException("Expense not found.");
+            }
         }
 
-      
+
     }
 }
