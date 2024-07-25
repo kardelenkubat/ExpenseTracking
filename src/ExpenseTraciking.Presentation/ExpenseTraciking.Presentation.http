@@ -1,0 +1,6 @@
+@ExpenseTraciking.Presentation_HostAddress = http://localhost:5038
+
+GET {{ExpenseTraciking.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
