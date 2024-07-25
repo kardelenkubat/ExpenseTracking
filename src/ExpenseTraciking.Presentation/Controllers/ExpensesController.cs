@@ -31,61 +31,65 @@ namespace ExpenseTraciking.Presentation.Controllers
 
             return Ok(expense);
         }
-    //    // GET: api/expenses
-    //    [HttpGet]
-    //    public async Task<ActionResult<IEnumerable<Expense>>> GetExpenses()
-    //    {
-    //        var expenses = await _expenseRepository.GetAllExpensesAsync();
-    //        return Ok(expenses);
-    //    }
+        // GET: api/expenses
+        [HttpGet("expense/{expenseId}")]
+        public async Task<ActionResult<IEnumerable<Expense>>> GetExpenseById(int expenseId)
+        {
+            var expense = _expenseRepository.GetExpenseById(expenseId);
+            if (expense == null)
+            {
+                return NotFound();
+            }
+            return Ok(expense);
+        }
 
-    //    // GET: api/expenses/5
-    //    [HttpGet("{id}")]
-    //    public async Task<ActionResult<Expense>> GetExpense(int id)
-    //    {
-    //        var expense = await _expenseRepository.GetExpenseByIdAsync(id);
-    //        if (expense == null)
-    //        {
-    //            return NotFound();
-    //        }
+        //    // GET: api/expenses/5
+        //    [HttpGet("{id}")]
+        //    public async Task<ActionResult<Expense>> GetExpense(int id)
+        //    {
+        //        var expense = await _expenseRepository.GetExpenseByIdAsync(id);
+        //        if (expense == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-    //        return Ok(expense);
-    //    }
+        //        return Ok(expense);
+        //    }
 
-    //    // POST: api/expenses
-    //    [HttpPost]
-    //    public async Task<ActionResult<Expense>> PostExpense(Expense expense)
-    //    {
-    //        await _expenseRepository.AddExpenseAsync(expense);
-    //        return CreatedAtAction(nameof(GetExpense), new { id = expense.Id }, expense);
-    //    }
+        //    // POST: api/expenses
+        //    [HttpPost]
+        //    public async Task<ActionResult<Expense>> PostExpense(Expense expense)
+        //    {
+        //        await _expenseRepository.AddExpenseAsync(expense);
+        //        return CreatedAtAction(nameof(GetExpense), new { id = expense.Id }, expense);
+        //    }
 
-    //    // PUT: api/expenses/5
-    //    [HttpPut("{id}")]
-    //    public async Task<IActionResult> PutExpense(int id, Expense expense)
-    //    {
-    //        if (id != expense.Id)
-    //        {
-    //            return BadRequest();
-    //        }
+        //    // PUT: api/expenses/5
+        //    [HttpPut("{id}")]
+        //    public async Task<IActionResult> PutExpense(int id, Expense expense)
+        //    {
+        //        if (id != expense.Id)
+        //        {
+        //            return BadRequest();
+        //        }
 
-    //        await _expenseRepository.UpdateExpenseAsync(expense);
-    //        return NoContent();
-    //    }
+        //        await _expenseRepository.UpdateExpenseAsync(expense);
+        //        return NoContent();
+        //    }
 
-    //    // DELETE: api/expenses/5
-    //    [HttpDelete("{id}")]
-    //    public async Task<IActionResult> DeleteExpense(int id)
-    //    {
-    //        var expense = await _expenseRepository.GetExpenseByIdAsync(id);
-    //        if (expense == null)
-    //        {
-    //            return NotFound();
-    //        }
+        //    // DELETE: api/expenses/5
+        //    [HttpDelete("{id}")]
+        //    public async Task<IActionResult> DeleteExpense(int id)
+        //    {
+        //        var expense = await _expenseRepository.GetExpenseByIdAsync(id);
+        //        if (expense == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-    //        await _expenseRepository.DeleteExpenseAsync(id);
-    //        return NoContent();
-    //    }
+        //        await _expenseRepository.DeleteExpenseAsync(id);
+        //        return NoContent();
+        //    }
     }
 }
 
