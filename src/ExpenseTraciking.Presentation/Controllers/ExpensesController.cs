@@ -2,6 +2,7 @@
 using ExpenseTraciking.Application.Interfaces;
 using ExpenseTraciking.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseTraciking.Presentation.Controllers
@@ -9,6 +10,7 @@ namespace ExpenseTraciking.Presentation.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ExpensesController : ControllerBase
     {
         private readonly IExpenseRepository _expenseRepository;

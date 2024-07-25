@@ -14,4 +14,8 @@
     <ProjectReference Include="..\ExpenseTraciking.Domain\ExpenseTraciking.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Authenticate\" />
+  </ItemGroup>
+
 </Project>
