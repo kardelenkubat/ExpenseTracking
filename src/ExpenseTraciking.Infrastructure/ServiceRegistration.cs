@@ -1,5 +1,6 @@
 ﻿using ExpenseTraciking.Application.Interfaces;
 using ExpenseTraciking.Infrastructure.Data;
+using ExpenseTraciking.Infrastructure.Repositories;
 using ExpenseTracking.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +16,7 @@ namespace ExpenseTraciking.Infrastructure
         options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             // Dependency Injection
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
 
         }

@@ -34,7 +34,7 @@ namespace ExpenseTraciking.Infrastructure.Services
                 {
                     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-                    // Veritabanına ekleme işlemi örneği
+                    
                     var newExpense = new Expense
                     {
                         Description = "Hosted Service Expense",
@@ -43,16 +43,27 @@ namespace ExpenseTraciking.Infrastructure.Services
                     };
 
                     dbContext.Expenses.Add(newExpense);
+
+                    
+                    var newUser = new User
+                    {
+                        Username = "HostedServiceUser",
+                        Email = "hostedserviceuser@example.com",
+                        Password = "password" 
+                    };
+
+                    dbContext.Users.Add(newUser);
+
                     await dbContext.SaveChangesAsync(stoppingToken);
                 }
 
-                _logger.LogInformation("DatabaseHostedService has added a new expense.");
+                _logger.LogInformation("DatabaseHostedService has added a new expense and a new user.");
 
-                
                 await Task.Delay(TimeSpan.FromDays(1), stoppingToken); 
             }
 
             _logger.LogInformation("DatabaseHostedService is stopping.");
         }
+
     }
 }
