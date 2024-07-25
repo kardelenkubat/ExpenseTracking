@@ -49,7 +49,7 @@ namespace ExpenseTraciking.Infrastructure.Services
                 _logger.LogInformation("DatabaseHostedService has added a new expense.");
 
                 
-                await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken); 
+                await Task.Delay(TimeSpan.FromDays(1), stoppingToken); 
             }
 
             _logger.LogInformation("DatabaseHostedService is stopping.");

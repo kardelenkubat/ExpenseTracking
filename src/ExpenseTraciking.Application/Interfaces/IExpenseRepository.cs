@@ -22,6 +22,7 @@ namespace ExpenseTraciking.Application.Interfaces
 
 
         public void DeleteExpense(int id);
+        IEnumerable<Expense> GetExpensesByUserIdAndDateRange(int userId, DateTime startDate, DateTime endDate);
 
     }
 }

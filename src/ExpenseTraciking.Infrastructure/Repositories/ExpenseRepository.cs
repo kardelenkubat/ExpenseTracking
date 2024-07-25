@@ -59,7 +59,12 @@ namespace ExpenseTracking.Infrastructure.Repositories
                 throw new InvalidOperationException("Expense not found.");
             }
         }
-
+        public IEnumerable<Expense> GetExpensesByUserIdAndDateRange(int userId, DateTime startDate, DateTime endDate)
+        {
+            return _context.Expenses
+                .Where(e => e.UserId == userId && e.Date >= startDate && e.Date <= endDate)
+                .ToList();
+        }
 
     }
 }

@@ -85,7 +85,37 @@ namespace ExpenseTraciking.Presentation.Controllers
             _expenseRepository.DeleteExpense(id);
             return NoContent();
         }
+        [HttpGet("daily/{userId}")]
+        [Authorize]
+        public IActionResult GetDailyExpenses(int userId)
+        {
+            var today = DateTime.Today;
+            var expenses = _expenseRepository.GetExpensesByUserIdAndDateRange(userId, today, today);
+            return Ok(expenses);
+        }
 
+        [HttpGet("weekly/{userId}")]
+        [Authorize]
+        public IActionResult GetWeeklyExpenses(int userId)
+        {
+            var today = DateTime.Today;
+            var startOfWeek = today.AddDays(-(int)today.DayOfWeek);
+            var endOfWeek = startOfWeek.AddDays(6);
+            var expenses = _expenseRepository.GetExpensesByUserIdAndDateRange(userId, startOfWeek, endOfWeek);
+            return Ok(expenses);
+        }
+
+        
+        [HttpGet("monthly/{userId}")]
+        [Authorize]
+        public IActionResult GetMonthlyExpenses(int userId)
+        {
+            var today = DateTime.Today;
+            var startOfMonth = new DateTime(today.Year, today.Month, 1);
+            var endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
+            var expenses = _expenseRepository.GetExpensesByUserIdAndDateRange(userId, startOfMonth, endOfMonth);
+            return Ok(expenses);
+        }
     }
 }
 
